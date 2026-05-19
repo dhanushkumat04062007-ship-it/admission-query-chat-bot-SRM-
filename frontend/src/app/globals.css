@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@theme {
+  --color-srm-maroon: #861F41;
+  --color-srm-gold: #F1C40F;
+  --color-ai-accent: #6366f1;
+  
+  --font-inter: "Inter", system-ui, -apple-system, sans-serif;
+  
+  --shadow-premium: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+  
+  --sidebar-bg: #09090b;
+  --sidebar-foreground: #f8fafc;
+  
+  --chat-assistant-bg: #f8fafc;
+  --chat-user-bg: #ffffff;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-inter);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ChatGPT Style Message Blocks */
+.message-row {
+  @apply w-full py-6 flex justify-center border-b border-gray-100/50;
+}
+
+.message-content {
+  @apply w-full max-w-5xl px-4 md:px-8 flex gap-6;
+}
+
+.assistant-avatar {
+  @apply w-8 h-8 rounded-sm bg-srm-maroon flex items-center justify-center text-white flex-shrink-0;
+}
+
+.user-avatar {
+  @apply w-8 h-8 rounded-sm bg-gray-500 flex items-center justify-center text-white flex-shrink-0;
+}
+
+/* Glass & Glow */
+.glass-sidebar {
+  background: rgba(9, 9, 11, 0.98);
+  backdrop-filter: blur(12px);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.input-container {
+  @apply relative max-w-5xl mx-auto w-full px-4;
+}
+
+.chat-input {
+  @apply w-full px-5 py-3.5 pr-12 rounded-2xl bg-white border border-gray-200 shadow-premium focus:ring-0 focus:border-gray-300 outline-none transition-all placeholder-gray-400 text-gray-800;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #cbd5e1;
+}
