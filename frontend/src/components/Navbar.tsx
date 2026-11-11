@@ -25,11 +25,19 @@ export default function Navbar() {
         return null;
     }
 
+    // Only the dark landing page can sit under a transparent navbar.
+    // Every other page is light, so the bar stays solid and a spacer
+    // keeps page content from sliding underneath it.
+    const isHome = pathname === '/';
+    const solid = scrolled || !isHome;
+
     return (
+        <>
+        {!isHome && <div className="h-16 bg-[#0b1120]" aria-hidden="true" />}
         <motion.nav
             initial={{ y: -100 }}
             animate={{ y: 0 }}
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[#0b1120]/80 backdrop-blur-md border-b border-white/5 shadow-lg' : 'bg-transparent border-transparent'}`}
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${solid ? 'bg-[#0b1120]/90 backdrop-blur-md border-b border-white/5 shadow-lg' : 'bg-transparent border-transparent'}`}
         >
             <div className="container mx-auto px-6 py-4 flex justify-between items-center">
                 {/* Logo Area */}
@@ -101,6 +109,7 @@ export default function Navbar() {
                 )}
             </AnimatePresence>
         </motion.nav>
+        </>
     );
 }
 

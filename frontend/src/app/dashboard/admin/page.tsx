@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../../../context/AuthContext';
 import { Card } from '../../../components/ui/Card';
 import { Button } from '../../../components/ui/Button';
-import Chatbot from '../../../components/Chatbot';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
@@ -115,7 +114,6 @@ export default function AdminDashboard() {
                 </Card>
             </div>
 
-            <Chatbot />
         </div>
     );
 }
