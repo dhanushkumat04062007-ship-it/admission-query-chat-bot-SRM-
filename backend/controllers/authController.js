@@ -95,8 +95,11 @@ exports.adminLogin = async (req, res) => {
     const { username, key } = req.body;
 
     try {
-        // Hardcoded Credential Check as per user request
-        if (username === 'naveen' && key === '1234567890') {
+        // Admin credentials come from the environment (see .env.example).
+        // If they are not set, admin login is disabled.
+        const adminUsername = process.env.ADMIN_USERNAME;
+        const adminKey = process.env.ADMIN_KEY;
+        if (adminUsername && adminKey && username === adminUsername && key === adminKey) {
 
             // Check if admin user exists in DB, if not create/fetch a placeholder admin user
             // For simplicity in this specific request, we will treating this as a system bypass
