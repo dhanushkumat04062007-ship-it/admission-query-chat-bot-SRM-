@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { API_URL } from '@/lib/api';
 
 interface Message {
     role: 'user' | 'assistant';
@@ -59,7 +60,7 @@ export default function ChatPage() {
 
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.post('http://localhost:5000/api/chat', {
+            const res = await axios.post(`${API_URL}/api/chat`, {
                 message: userMessage.content,
                 history: updatedMessages.slice(-5)
             }, {

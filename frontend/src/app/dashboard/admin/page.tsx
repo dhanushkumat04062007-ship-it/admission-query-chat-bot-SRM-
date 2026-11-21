@@ -6,6 +6,7 @@ import { Card } from '../../../components/ui/Card';
 import { Button } from '../../../components/ui/Button';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { API_URL } from '@/lib/api';
 
 export default function AdminDashboard() {
     const { user, loading: authLoading } = useAuth();
@@ -25,7 +26,7 @@ export default function AdminDashboard() {
     const fetchDashboardData = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get('http://localhost:5000/api/admin/dashboard', {
+            const res = await axios.get(`${API_URL}/api/admin/dashboard`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setData(res.data);
@@ -38,7 +39,7 @@ export default function AdminDashboard() {
         e.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            await axios.post('http://localhost:5000/api/admin/allowed-students',
+            await axios.post(`${API_URL}/api/admin/allowed-students`,
                 { email, register_number: regNum },
                 { headers: { Authorization: `Bearer ${token}` } }
             );

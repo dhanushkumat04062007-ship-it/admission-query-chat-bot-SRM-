@@ -6,6 +6,7 @@ import { Button } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';
 import Link from 'next/link';
 import axios from 'axios';
+import { API_URL } from '@/lib/api';
 
 export default function RegisterPage() {
     const [formData, setFormData] = useState({
@@ -36,7 +37,7 @@ export default function RegisterPage() {
         }
 
         try {
-            await axios.post('http://localhost:5000/api/auth/register', formData);
+            await axios.post(`${API_URL}/api/auth/register`, formData);
             router.push('/login');
         } catch (err: any) {
             setError(err.response?.data?.message || 'Registration failed');

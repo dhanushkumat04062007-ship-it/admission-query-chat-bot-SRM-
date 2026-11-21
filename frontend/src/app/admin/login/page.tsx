@@ -6,6 +6,7 @@ import { Button } from '../../../components/ui/Button';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { ShieldCheck, Lock, UserCog } from 'lucide-react';
+import { API_URL } from '@/lib/api';
 
 export default function AdminLoginPage() {
     const [username, setUsername] = useState('');
@@ -21,7 +22,7 @@ export default function AdminLoginPage() {
         setError('');
 
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/admin-login', { username, key });
+            const res = await axios.post(`${API_URL}/api/auth/admin-login`, { username, key });
             login(res.data.token, res.data.user);
             router.push('/dashboard/admin');
         } catch (err: any) {

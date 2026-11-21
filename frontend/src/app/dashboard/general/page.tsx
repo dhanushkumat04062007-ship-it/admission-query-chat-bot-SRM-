@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Search, MapPin, Monitor, GraduationCap, Building2 } from 'lucide-react';
+import { API_URL } from '@/lib/api';
 
 export default function GeneralDashboard() {
     const [data, setData] = useState<any>(null);
@@ -13,7 +14,7 @@ export default function GeneralDashboard() {
 
     const fetchPublicData = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/general/info');
+            const res = await axios.get(`${API_URL}/api/general/info`);
             setData(res.data);
         } catch (err) {
             console.error(err);

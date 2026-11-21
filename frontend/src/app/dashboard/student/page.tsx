@@ -5,6 +5,7 @@ import { useAuth } from '../../../context/AuthContext';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { User, Home, Clock, LogOut, ChevronRight, Bell } from 'lucide-react';
+import { API_URL } from '@/lib/api';
 
 export default function StudentDashboard() {
     const { user, loading: authLoading } = useAuth();
@@ -28,7 +29,7 @@ export default function StudentDashboard() {
     const fetchDashboardData = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get('http://localhost:5000/api/student/dashboard', {
+            const res = await axios.get(`${API_URL}/api/student/dashboard`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setData(res.data);
