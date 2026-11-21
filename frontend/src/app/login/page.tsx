@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { ArrowRight, BookOpen, GraduationCap, Users } from 'lucide-react';
 import axios from 'axios';
+import { API_URL } from '@/lib/api';
 
 export default function AccessPortalPage() {
     const [accessMode, setAccessMode] = useState<'student' | 'general'>('student');
@@ -23,7 +24,7 @@ export default function AccessPortalPage() {
         setLoading(true);
         setError('');
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/student-access', { 
+            const res = await axios.post(`${API_URL}/api/auth/student-access`, { 
                 email, 
                 register_number: regNo 
             });
@@ -40,7 +41,7 @@ export default function AccessPortalPage() {
         setLoading(true);
         setError('');
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/general-access');
+            const res = await axios.post(`${API_URL}/api/auth/general-access`);
             login(res.data.token, res.data.user);
         } catch (err: any) {
             setError(err.response?.data?.message || 'Access denied. Please try again.');

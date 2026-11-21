@@ -1,5 +1,6 @@
 const pool = require('../config/db');
-const ollama = require('ollama').default;
+const { Ollama } = require('ollama');
+const ollama = new Ollama({ host: process.env.OLLAMA_HOST || 'http://127.0.0.1:11434' });
 
 exports.chat = async (req, res) => {
     const { message, history } = req.body;

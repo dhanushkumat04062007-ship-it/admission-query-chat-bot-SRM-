@@ -92,6 +92,8 @@ npm install
 npm run dev               # http://localhost:3000
 ```
 
+The frontend calls `http://localhost:5000` by default. To use another API, copy `frontend/.env.example` to `frontend/.env.local` and set `NEXT_PUBLIC_API_URL`.
+
 ### 4. AI model (optional)
 
 ```bash
@@ -100,6 +102,15 @@ ollama serve
 ```
 
 On Windows, `Start_SRM_AI.bat` starts Ollama, the backend and the frontend together.
+
+## Deployment
+
+| Part | Suggested host | Settings |
+|---|---|---|
+| Database | Any managed MySQL 8 | Import `schema.sql` |
+| Backend | Render or Railway (Node web service, root `backend`) | Values from `.env.example`, with `CLIENT_URL` = your frontend URL |
+| Frontend | Vercel (root `frontend`) | `NEXT_PUBLIC_API_URL` = your backend URL |
+| LLM | Optional | Set `OLLAMA_HOST` to a reachable Ollama server. Without it, the bot answers straight from the database. |
 
 ## API overview
 
@@ -122,11 +133,10 @@ On Windows, `Start_SRM_AI.bat` starts Ollama, the backend and the frontend toget
 - The chat endpoint does not read the user's token yet, so chat queries are not written to the activity log.
 - The search bar on the Admission Information Center is visual only.
 - The chat picks database context by keyword matching, not semantic search.
-- API URLs are hardcoded to `localhost` in the frontend.
 - No automated tests yet.
 
 ## Roadmap
 
 - Verify Google ID tokens on the server
-- Move the API base URL to an environment variable and deploy a live demo
+- Deploy a public live demo
 - Add tests for the auth and chat endpoints

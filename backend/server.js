@@ -10,8 +10,10 @@ const app = express();
 
 // Middleware
 app.use(express.json());
+// CLIENT_URL: comma-separated list of allowed frontend origins
+const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:3000').split(',').map(o => o.trim());
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: allowedOrigins,
     credentials: true
 }));
 
